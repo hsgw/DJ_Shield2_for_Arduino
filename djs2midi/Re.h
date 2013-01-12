@@ -3,8 +3,6 @@
 
 #include "Arduino.h"
 
-const int dir[] = { 0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0 };
-
 //PORTB
 //D10 and D11
 #define re_Input_Mask B110011

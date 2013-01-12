@@ -11,12 +11,12 @@ Re::Re(){
 void Re::update(){
     index = ((index << 2) + ((PINB & re_Pin_Mask) >> 2)) & 15;
     switch(index){
-      case B0111:
+      case B0001:
         re_Dir++;
         re_Moved = true;
 //      Serial.println("+");
         break;
-      case B1101:
+      case B0010:
         re_Dir--;
         re_Moved = true;
  //     Serial.println("-");
