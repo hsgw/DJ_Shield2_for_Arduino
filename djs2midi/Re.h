@@ -17,10 +17,9 @@ class Re{
     boolean changed();
     int value();
   private:
-    boolean re_Moved;
-    int re_Dir;
-    byte index;
-    unsigned long last_Time;
+    volatile boolean re_Moved;
+    volatile int re_Dir;
+    volatile byte index;
 };
 
 #endif

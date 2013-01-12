@@ -1,32 +1,36 @@
-#include "Arduino.h"
 #include "Pot.h"
 
-Pot::Pot(boolean _pot_Direction)
+Pot::Pot()
 {
-  pot_Direction = _pot_Direction;
   DDRD = DDRD | pin_control_4051;
+}
+
+void Pot::init(){
+  read_Analog_Pin();
+  read_4051();
+  
+  for(int i=0;i<13;i++){
+    current_Value[i] = current_Value_Raw[i] >> 3;
+    last_Value[i] = current_Value_Raw[i] >> 3;
+  }
 }
 
 void Pot::update(){
   int temp_Value[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-  for(int count = 0;count<4;count++){
-    read_Analog_Pin();
-    read_4051();
-    for(int i=0;i<13;i++){
-      temp_Value[i] += parse_Value(current_Value_Raw[i]);
-    }
-  }
   
-  for(int i = 0;i<13;i++){
-    temp_Value[i] = temp_Value[i] >> 2;
-    if(temp_Value[i] == 127){
-      current_Value[i] = 127;
-    }else{
-      current_Value[i] = (last_Value[i] + temp_Value[i]) >> 1;
-    }
-  }
+  read_Analog_Pin();
+  analogRead(analog_pin_4051);
+  
+  read_Analog_Pin();
+  read_4051();
   
   for(int i=0;i<13;i++){
+      temp_Value[i] = current_Value_Raw[i] >> 3;
+      if(temp_Value[i] == 127){
+        current_Value[i] = 127;
+      }else{
+        current_Value[i] = (last_Value[i] + temp_Value[i]) >> 1;
+      }
     if(current_Value[i] != last_Value[i]){
       value_Changed[i] = true;
       last_Value[i] = current_Value[i];
@@ -62,14 +66,5 @@ void Pot::read_4051(){
 void Pot::read_Analog_Pin(){
   for(int i=0;i<5;i++){
     current_Value_Raw[i] = analogRead(i);
-  }
-}
-
-int Pot::parse_Value(int temp_Value){
-  temp_Value = temp_Value >> 3;
-  if(pot_Direction){
-    return 127 - temp_Value;
-  }else{
-    return temp_Value;
   }
 }
