@@ -23,4 +23,6 @@ Original source : [MIDI Library for Arduino](http://playground.arduino.cc/Main/M
 ## moco for LUFA
 (OPTIONAL and RECOMEND) USB-MIDI firmware for ArduinoUNO(ATMEGA8u2/32u4)  
 (japanese) <http://morecatlab.akiba.coocan.jp/lab/index.php/aruino/midi-firmware-for-arduino-uno-moco/>  
+  <http://www.dm9records.com/index.php/tips/arduino/moco/>
+
 (English) <http://morecatlab.akiba.coocan.jp/morecat_lab/MocoLUFA.html>
