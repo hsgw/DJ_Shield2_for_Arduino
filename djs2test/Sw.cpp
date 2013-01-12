@@ -1,4 +1,3 @@
-#include "Arduino.h"
 #include "Sw.h"
 
 Sw::Sw(){

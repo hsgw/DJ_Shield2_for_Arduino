@@ -11,15 +11,13 @@ const byte value_Control_4051[8] = {B00000,B10000,B01000,B11000,B00100,B10100,B0
 
 class Pot{
   public:
-    Pot(boolean _pot_Direction = true);
+    Pot();
+    void init();
     void update();
     boolean changed(int);
     int value(int);
     int raw_Value(int);
   private:
-    boolean pot_Direction;
-    int center_Max;
-    int center_Min;
     int current_Value_Raw[13];
     int current_Value[13];
     int last_Value[13];
@@ -27,7 +25,6 @@ class Pot{
     boolean value_Changed[13];
     void read_4051();
     void read_Analog_Pin();
-    int parse_Value(int);
 };
 
 #endif

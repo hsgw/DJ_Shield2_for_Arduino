@@ -1,35 +1,28 @@
-#include "Arduino.h"
 #include "Re.h"
+
 
 Re::Re(){
   re_Moved = false;
   re_Dir = 1;
   index = 0;
-  last_Time = 0;
   DDRB = DDRB & re_Input_Mask;
 }
 
 void Re::update(){
-  int n = 0;
-  unsigned long time = millis();
-  if(time - last_Time > 1){
     index = ((index << 2) + ((PINB & re_Pin_Mask) >> 2)) & 15;
     switch(index){
-      case 0b0111:
+      case B0111:
         re_Dir++;
         re_Moved = true;
-        last_Time = time;
 //      Serial.println("+");
         break;
-      case 0b1011:
+      case B1101:
         re_Dir--;
         re_Moved = true;
-        last_Time = time;
  //     Serial.println("-");
         break;
       default:break;
      }
-  }
 }
 
 boolean Re::changed(){
